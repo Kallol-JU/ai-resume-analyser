@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import {
   isRouteErrorResponse,
   Links,
@@ -6,6 +7,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
+import { usePuterStore } from "~/lib/puter";
 
 import type { Route } from "./+types/root";
 import "./app.css";
@@ -46,6 +48,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  const init = usePuterStore((s) => s.init);
+
+  useEffect(() => {
+    init();
+  }, [init]);
+
   return <Outlet />;
 }
 
